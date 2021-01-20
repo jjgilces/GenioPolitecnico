@@ -10,42 +10,56 @@ package estructura;
  * @author CltControl
  */
 public class Node<E> {
-    private E data;
-    private Node<E> left;
-    private Node<E> right;
+    private String informacion;
+    private Node getLeft;
+    private Node right;
+    private String type;
     private boolean isLeft;
-    public Node(E data){
-        this.data=data;
-        left=right=null;
+  
+    
+    public Node(String informacion,String type){
+        this.informacion=informacion;
+        this.type = type;
+    }
+
+    public Node(String informacion) {
+        readLine(informacion);
+    }
+    
+    public void readLine(String informacion){
+        if (informacion.startsWith("#P")) this.type="pregunta";
+        else this.type = "respuesta";
+        this.informacion = informacion.substring(3);
+    }
+    
+
+    /**
+     * @return the informacion
+     */
+    public String getInformacion() {
+        return informacion;
     }
 
     /**
-     * @return the data
+     * @param informacion the informacion to set
      */
-    public E getData() {
-        return data;
+    public void setInformacion(String informacion) {
+        this.informacion = informacion;
     }
 
     /**
-     * @param data the data to set
+     * @return the getLeft
      */
-    public void setData(E data) {
-        this.data = data;
-    }
-
-    /**
-     * @return the left
-     */
-    public Node<E> getLeft() {
+    public Node getLeft() {
         this.isLeft=true;
-        return left;
+        return getLeft;
     }
 
     /**
-     * @param left the left to set
+     * @param getLeft the getLeft to set
      */
-    public void setLeft(Node<E> left) {
-        this.left = left;
+    public void setLeft(Node getLeft) {
+        this.getLeft = getLeft;
     }
 
     public boolean isIsLeft() {
@@ -55,7 +69,7 @@ public class Node<E> {
     /**
      * @return the right
      */
-    public Node<E> getRight() {
+    public Node getRight() {
         this.isLeft=false;
         return right;
     }
@@ -67,6 +81,6 @@ public class Node<E> {
         this.right = right;
     }
     public boolean isHoja(){
-        return (left==null && right==null);
+        return (getLeft==null && right==null);
     }
 }

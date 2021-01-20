@@ -14,99 +14,86 @@ import java.util.Queue;
  * @author Johan
  */
 
-public class BinaryTree<E> {
+public class BinaryTree {
 //    public static Node<E> prevNode = null;
-    Node<E> root;
-    public class Node<E> {
-        private E data;
-        private Node<E> left;
-        private Node<E> right;
-
-        public Node(E data) {
-            this.data = data;
-        }
-
-        @Override
-        public String toString() {
-            return  data + " ";
-        }
-        
-    }
-
+    Node root;
+    
     public boolean isEmpty() {
         return root == null;
     }
 
-    private Node<E> searchNode(E data) {
+    private Node searchNode(String data) {
         return searchNode(data, root);
     }
 
-    private Node<E> searchNode(E data, Node<E> n) {
+    private Node searchNode(String data, Node n) {
         if (n == null) return n; //No preguntar con isEmpty 
-        else if (n.data.equals(data)) return n;
+        else if (n.getInformacion().equals(data)) return n;
         else {
-            Node<E> nl = searchNode(data, n.left);
+            Node nl = searchNode(data, n.getLeft());
             if (nl != null)return nl;
-            return searchNode(data, n.right);
+            return searchNode(data, n.getRight());
         }
     }
 
-    private Node<E> searchParent(E child) {
+    private Node searchParent(String child) {
         return searchParent(child, root);
     }
 
-    private Node<E> searchParent(E child, Node<E> n) {
+    private Node searchParent(String child, Node n) {
         if (n == null) {
             return n;
-        } else if ((n.left != null && n.left.data.equals(child)) 
-                || (n.right != null && n.right.data.equals(child))) {
+        } else if ((n.getLeft() != null && n.getLeft().getInformacion().equals(child)) 
+                || (n.getRight() != null && n.getRight().getInformacion().equals(child))) {
             return n;
         } else {
-            Node<E> nl = searchParent(child, n.left);
+            Node nl = searchParent(child, n.getLeft());
             if (nl != null)      return nl;
-            return searchParent(child, n.right);
+            return searchParent(child, n.getRight());
         }
     }
 //para elementos repetidos
-    public boolean insert(E child, E parent){
-        Node<E> nchild = new Node<>(child);
+    public boolean insert(String child, String parent){
+        Node nchild = new Node<>(child);
         if (isEmpty() && parent == null) {
             root = nchild;
             return true;
         }
-        Node<E> np = searchNode(parent);
+        Node np = searchNode(parent);
         if  (np != null) {
-            if (np.left == null) {
-                np.left = nchild;
+            if (np.getLeft() == null) {
+                np.setLeft(nchild);
                 return true;
-            } else if (np.right == null) {
-                np.right = nchild;
+            } else if (np.getRight() == null) {
+                np.setRight(nchild);
                 return true;
             }
         }
         return false;
     }
     
-    public boolean add(E child, E parent) {
-        Node<E> nchild = new Node<>(child);
+    public boolean add(String child, String parent) {
+        Node nchild = new Node(child);
         if (isEmpty() && parent == null) {
             root = nchild;
             return true;
         }
-        Node<E> np = searchNode(parent);
-        Node<E> nce = searchNode(child);
+        Node np = searchNode(parent);
+        Node nce = searchNode(child);
         if (nce == null && np != null) {
-            if (np.left == null) {
-                np.left = nchild;
+            if (np.getLeft() == null) {
+                np.setLeft( nchild);
                 return true;
-            } else if (np.right == null) {
-                np.right = nchild;
+            } else if (np.getRight() == null) {
+                np.setRight(nchild);
                 return true;
             }
         }
         return false;
     }
-     public E max(){
+    
+    
+     /*public E max(){
         return max(root);
     }
     
@@ -114,21 +101,21 @@ public class BinaryTree<E> {
         if(n==null)return null;
         else if(n.right==null)return n.data;
         else return max(n.right); 
-    }
-    public boolean remove(E child) {
+    }*/
+    public boolean remove(String child) {
         if (child == null || isEmpty()) {
             return false;
         }
-        if (root.data.equals(child)) {
+        if (root.getInformacion().equals(child)){
             root = null;
             return true;
         }
-        Node<E> np = searchParent(child);
+        Node np = searchParent(child);
         if (np != null) {
-            if (np.left != null && np.left.data.equals(child)) {
-                np.left = null;
+            if (np.getLeft() != null && np.getLeft().getInformacion().equals(child)) {
+                np.setLeft( null);
             } else {
-                np.right = null;
+                np.setRight( null);
             }
             return true;
         }
@@ -139,13 +126,13 @@ public class BinaryTree<E> {
         return size(root);
     }
 
-    public int size(Node<E> n) {
+    public int size(Node n) {
         if (n == null) {
             return 0;
         }
-        return 1 + size(n.left) + size(n.right);
+        return 1 + size(n.getLeft()) + size(n.getRight());
     }
-   public E min(){
+   /*public E min(){
         return min(root);
     }
     
@@ -153,41 +140,41 @@ public class BinaryTree<E> {
         if(n==null)return null;
         else if(n.left==null)return n.data;
         else return min(n.left); 
-    }
+    }*/
     
     public int height() {
         return height(root);
     }
 
-    private int height(Node<E> n) {
+    private int height(Node n) {
         if (n == null) {
             return 0;
         }
-        return 1 + Math.max(height(n.left), height(n.right));
+        return 1 + Math.max(height(n.getLeft()), height(n.getRight()));
     }
 
-    public boolean isFull() {
+    /*public boolean isFull() {
         return isFull(root);
     }
 
-    private boolean isFull(Node<E> n) {
+    private boolean isFull(Node n) {
         if (n == null) {
             return true;
-        } else if ((n.left == null && n.right == null) || (n.left != null && n.right == null)) {
+        } else if ((n.getLeft() == null && n.getRight() == null) || (n.getLeft() != null && n.getRight() == null)) {
             return false;
         }
-        return height(n.left) == height(n.right) && isFull(n.left) && isFull(n.right);
-    }
+        return height(n.getLeft()) == height(n.getRight()) && isFull(n.getLeft()) && isFull(n.getRight());
+    }*/
 
     public void preOrden() {
         preOrden(root);
     }
 
-    private void preOrden(Node<E> n) {
+    private void preOrden(Node n) {
         if (n != null) {
             System.out.println(n);
-            preOrden(n.left);
-            preOrden(n.right);
+            preOrden(n.getLeft());
+            preOrden(n.getRight());
         }
     }
 
@@ -195,10 +182,10 @@ public class BinaryTree<E> {
         postOrden(root);
     }
 
-    private void postOrden(Node<E> n) {
+    private void postOrden(Node n) {
         if (n != null) {
-            postOrden(n.left);
-            postOrden(n.right);
+            postOrden(n.getLeft());
+            postOrden(n.getRight());
             System.out.println(n);
         }
     }
@@ -208,17 +195,17 @@ public class BinaryTree<E> {
         System.out.println("");
     }
 
-    private void inOrden(Node<E> n) {
+    private void inOrden(Node n) {
         if (n != null) {
-            inOrden(n.left);
-            System.out.print(n);
-            inOrden(n.right);
+            inOrden(n.getLeft());
+            System.out.print(n.getInformacion());
+            inOrden(n.getRight());
         }
     }
 
     
 
-    public E maxlevel(int lvl) {
+    /*public E maxlevel(int lvl) {
         return null;
     }
 
@@ -235,13 +222,13 @@ public class BinaryTree<E> {
             elemts.addAll(maxlevel(lvl, n.right, lvlAct + 1));
         }
         return elemts;
-    }
+    }*/
 
-    public Node<E> getRoot() {
+    public Node getRoot() {
         return root;
     }
    
-    public boolean isMirror(BinaryTree<E> otherTree) {
+    /*public boolean isMirror(BinaryTree<E> otherTree) {
         if (otherTree == null) {
             return false;
         }
@@ -256,26 +243,33 @@ public class BinaryTree<E> {
             return false;
         }
         return isMirror(n.left, Other.right) && isMirror(n.right, Other.left);
-    }
+    }*/
 
     public void anchura() {
         if (!isEmpty()) {
-            Queue<Node<E>> cola = new LinkedList<>();
+            Queue<Node> cola = new LinkedList<>();
             cola.offer(root);
             while (!cola.isEmpty()) {
-                Node<E> n = cola.poll();
-                System.out.print(n.data +" ");
-                if (n.left != null) {
-                    cola.offer(n.left);
+                Node n = cola.poll();
+                System.out.print(n.getInformacion() +" ");
+                if (n.getLeft() != null) {
+                    cola.offer(n.getLeft());
                 }
-                if (n.right != null) {
-                    cola.offer(n.right);
+                if (n.getRight() != null) {
+                    cola.offer(n.getRight());
                 }
             }
         }
         System.out.println("");
     }
-    public void setLeft(BinaryTree<E> tree) {
+    
+    
+    
+    public void cargarData() {
+    
+    
+    }
+    /*public void setLeft(BinaryTree<E> tree) {
         this.root.left=tree.root;
     }
     public void setRight(BinaryTree<E> tree) {
@@ -283,10 +277,10 @@ public class BinaryTree<E> {
     }
     public boolean esHoja() {
         return this.root.left == null && this.root.right == null && !this.isEmpty();
-    }
+    }*/
 
     
-    public String decision(List<String> lado) {
+    /*public String decision(List<String> lado) {
         Node<String> resultado = decision(new LinkedList<>(lado), root);
         return resultado != null ? resultado.data : "Incertidumbre";
     }
@@ -477,22 +471,22 @@ public class BinaryTree<E> {
             lista.addAll(getValuesFromLevels(lvl1, lvl2, n.right, lvlAct + 1));
         }
         return lista;
-    }
+    }*/
     @Override
     public boolean equals(Object o) {
         if (o == null)            return false;
         if (o == this) return true;
         if (o.getClass() != this.getClass())      return false;
-        BinaryTree<E> otro = (BinaryTree<E>) o;
+        BinaryTree otro = (BinaryTree) o;
         return equals(root, otro.root);
     }
 
-    private boolean equals(Node<E> parent1, Node<E> parent2) {
+    private boolean equals(Node parent1, Node parent2) {
         if (parent1 == null && parent2 == null)  return true;
-        if (parent1 == null || parent2 == null || !parent1.data.equals(parent2.data)) {
+        if (parent1 == null || parent2 == null || !parent1.getInformacion().equals(parent2.getInformacion())) {
             return false;
         }
-        return equals(parent1.left, parent2.left) && equals(parent1.right, parent2.right);
+        return equals(parent1.getLeft(), parent2.getLeft()) && equals(parent1.getRight(), parent2.getRight());
     }
 }
 
@@ -592,3 +586,6 @@ public class BinaryTree<E> {
 //        return isBST(root.left,l,n,f) &&    isBST(root.right,n,r,f);  
 //    } 
 */
+
+
+
