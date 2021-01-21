@@ -9,7 +9,7 @@ package estructura;
  *
  * @author CltControl
  */
-public class Node<E> {
+public class Node {
     private String informacion;
     private Node getLeft;
     private Node right;
@@ -23,7 +23,8 @@ public class Node<E> {
     }
 
     public Node(String informacion) {
-        readLine(informacion);
+        this.informacion=informacion;
+                
     }
     
     public void readLine(String informacion){
@@ -77,7 +78,7 @@ public class Node<E> {
     /**
      * @param right the right to set
      */
-    public void setRight(Node<E> right) {
+    public void setRight(Node right) {
         this.right = right;
     }
     public boolean isHoja(){

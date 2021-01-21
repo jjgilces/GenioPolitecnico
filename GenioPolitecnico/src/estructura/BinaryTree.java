@@ -54,7 +54,7 @@ public class BinaryTree {
     }
 //para elementos repetidos
     public boolean insert(String child, String parent){
-        Node nchild = new Node<>(child);
+        Node nchild = new Node(child);
         if (isEmpty() && parent == null) {
             root = nchild;
             return true;
@@ -226,6 +226,23 @@ public class BinaryTree {
 
     public Node getRoot() {
         return root;
+    }
+    
+    
+    public static BinaryTree loadData() {
+        BinaryTree bt = new BinaryTree();
+        bt.add("Es mamifero?",null );
+        bt.add("Es animal domestico?", "Es mamifero?");
+        bt.add("Perro","Es animal domestico?");
+        bt.add("Es de granja?","Es animal domestico?");
+        bt.add("Oveja","Es de granja?");
+        bt.add("Elefante","Es de granja?");
+        bt.add("Es un ave?", "Es mamifero?");
+        bt.add("Un pinguino","Es un ave?");
+        bt.add("Vive en el oceano?","Es un ave?");
+        bt.add("Un calamar","Vive en el oceano?");
+        bt.add("Una araña","Vive en el oceano?");
+        return  bt;
     }
    
     /*public boolean isMirror(BinaryTree<E> otherTree) {
