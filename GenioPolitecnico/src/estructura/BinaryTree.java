@@ -46,7 +46,7 @@ public class BinaryTree {
         }
     }
 
-    private Node searchParent(String child) {
+    public Node searchParent(String child) {
         return searchParent(child, root);
     }
 
