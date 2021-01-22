@@ -26,11 +26,25 @@ public class Node {
         this.informacion=informacion;
                 
     }
+    public Node(){
+        this.informacion = null;
+        this.type = null;
+    }
     
     public void readLine(String informacion){
         if (informacion.startsWith("#P")) this.type="pregunta";
         else this.type = "respuesta";
         this.informacion = informacion.substring(3);
+    }
+    
+    
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
     
 
@@ -46,6 +60,11 @@ public class Node {
      */
     public void setInformacion(String informacion) {
         this.informacion = informacion;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" + "informacion=" + informacion + '}';
     }
 
     /**
