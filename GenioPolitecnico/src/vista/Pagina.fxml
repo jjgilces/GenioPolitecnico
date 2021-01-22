@@ -27,14 +27,14 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fitHeight="158.0" fitWidth="317.0" layoutX="-15.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="212.0" fitWidth="317.0" layoutX="-15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/Pergamino.png" />
                                  </image>
                               </ImageView>
-                              <VBox fx:id="cajaPreguntas" layoutX="11.0" layoutY="-1.0" prefHeight="160.0" prefWidth="281.0">
+                              <VBox fx:id="cajaPreguntas" layoutX="9.0" layoutY="19.0" prefHeight="160.0" prefWidth="281.0">
                                  <children>
-                                    <Label fx:id="question" alignment="CENTER" prefHeight="141.0" prefWidth="250.0" textAlignment="CENTER">
+                                    <Label fx:id="question" alignment="CENTER" prefHeight="166.0" prefWidth="292.0" textAlignment="CENTER">
                                        <font>
                                           <Font name="Georgia" size="22.0" />
                                        </font>

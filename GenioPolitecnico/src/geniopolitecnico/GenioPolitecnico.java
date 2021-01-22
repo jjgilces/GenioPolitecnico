@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Optional;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -37,13 +38,13 @@ public class GenioPolitecnico extends Application{
         stage.setTitle("Genio Politecnico");
         stage.setScene(scene);
         stage.show();
-        /*stage.setOnCloseRequest(e->{
+        stage.setOnCloseRequest(e->{
             Optional<ButtonType> result = confirmation();
             if(result.get()==ButtonType.OK){
                 Platform.exit();
             }else{
                 e.consume();
-            }});*/
+        }});
     }
     
     

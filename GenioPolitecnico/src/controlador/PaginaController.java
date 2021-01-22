@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -107,20 +109,30 @@ public class PaginaController implements Initializable {
     
      @FXML
     void responseNo(ActionEvent event) {
+        response.setText("");
+        btnFinalN.setOpacity(0);
+        btnFinalY.setOpacity(0);
         Node padre = bt.searchParent(temp.getInformacion());
         final Node pregunta = new Node("","pregunta");
         final Node respuesta = new Node("","respuesta");
         cajaPreguntas.getChildren().clear();
         Label lr= new Label("¿En que animal estabas pensando?");
         TextField tr = new TextField();
+        tr.setOpacity(0.5);
         Label lq= new Label("¿Como idenficamos a este animal?");
         TextField tq = new TextField();
+        tq.setOpacity(0.5);
+        tr.setMaxSize(100, 20);
+        tq.setMaxSize(200, 20);
         Button btn = new Button("Submit");
         cajaPreguntas.getChildren().add(lr);
         cajaPreguntas.getChildren().add(tr);
         cajaPreguntas.getChildren().add(lq);
         cajaPreguntas.getChildren().add(tq);
         cajaPreguntas.getChildren().add(btn);
+        cajaPreguntas.setAlignment(Pos.CENTER);
+        System.out.println(tq.getWidth());
+        cajaPreguntas.setPadding(new Insets(15,15,15,15));
         btn.setOnAction( (ActionEvent e) -> {
             TextField t = (TextField)cajaPreguntas.getChildren().get(3);
             TextField t1 = (TextField)cajaPreguntas.getChildren().get(1);
@@ -130,7 +142,7 @@ public class PaginaController implements Initializable {
             bt.add(pregunta.getInformacion(), padre.getInformacion());
             bt.add(respuesta.getInformacion(),pregunta.getInformacion());
             bt.add(temp.getInformacion(),pregunta.getInformacion());
-            bt.preOrden();
+            bt.preOrdenData();
         });
         
     }
@@ -153,5 +165,15 @@ public class PaginaController implements Initializable {
         temp =bt.getRoot();
         question.setText(temp.getInformacion());
     }    
+    
+    public static boolean textFieldNull(TextField text) {
+        boolean isNull = false;
+        if (text.getText().isEmpty()) {
+            isNull = true;
+        } else if (!text.getText().matches("[a-zA-Z]+")  && !(text.getText().contains(" "))) {
+            isNull = true;
+        }
+        return isNull;
+    }
     
 }
