@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controlador;
+
 import javafx.scene.layout.VBox;
 import estructura.BinaryTree;
 import estructura.Node;
@@ -21,6 +22,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -32,13 +35,14 @@ import javafx.scene.image.ImageView;
  * @author User
  */
 public class PaginaController implements Initializable {
-    
+
     BinaryTree bt = new BinaryTree();
+
     public void dataArbol(BinaryTree bt) {
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader("src/data/datos.txt"));
-            BinaryTree.cargarArbol (br, bt.getRoot());
+            BinaryTree.cargarArbol(br, bt.getRoot());
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PaginaController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -46,42 +50,38 @@ public class PaginaController implements Initializable {
         }
     }
 
-
-    
     @FXML
     private Node temp;
-    
+
     @FXML
     private VBox cajaPreguntas;
-    
+
     @FXML
     private ImageView image;
-    
+
     @FXML
     private Button btnyes;
 
     @FXML
-    private Button btnno;    
+    private Button btnno;
 
     @FXML
     private Label question;
 
-    
     @FXML
     private Label response;
-    
+
     @FXML
     private Button btnFinalY;
 
     @FXML
     private Button btnFinalN;
-    
-    
+
     @FXML
     void nextOptionNo(ActionEvent event) {
         temp = temp.getRight();
-        question.setText(temp.getInformacion()); 
-        if (temp.getRight()==null) {
+        question.setText(temp.getInformacion());
+        if (temp.getRight() == null) {
             response.setText("¿Era esta tu respuesta?");
             btnyes.setDisable(true);
             btnno.setDisable(true);
@@ -96,7 +96,7 @@ public class PaginaController implements Initializable {
     void nextOptionYes(ActionEvent event) {
         temp = temp.getLeft();
         question.setText(temp.getInformacion());
-        if (temp.getLeft()==null) {
+        if (temp.getLeft() == null) {
             response.setText("¿Era esta tu respuesta?");
             btnyes.setDisable(true);
             btnno.setDisable(true);
@@ -106,20 +106,20 @@ public class PaginaController implements Initializable {
             btnFinalN.setText("No");
         }
     }
-    
-     @FXML
+
+    @FXML
     void responseNo(ActionEvent event) {
         response.setText("");
         btnFinalN.setOpacity(0);
         btnFinalY.setOpacity(0);
         Node padre = bt.searchParent(temp.getInformacion());
-        final Node pregunta = new Node("","pregunta");
-        final Node respuesta = new Node("","respuesta");
+        final Node pregunta = new Node("", "pregunta");
+        final Node respuesta = new Node("", "respuesta");
         cajaPreguntas.getChildren().clear();
-        Label lr= new Label("¿En que animal estabas pensando?");
+        Label lr = new Label("¿En que animal estabas pensando?");
         TextField tr = new TextField();
         tr.setOpacity(0.5);
-        Label lq= new Label("¿Como idenficamos a este animal?");
+        Label lq = new Label("¿Como idenficamos a este animal?");
         TextField tq = new TextField();
         tq.setOpacity(0.5);
         tr.setMaxSize(100, 20);
@@ -132,25 +132,37 @@ public class PaginaController implements Initializable {
         cajaPreguntas.getChildren().add(btn);
         cajaPreguntas.setAlignment(Pos.CENTER);
         System.out.println(tq.getWidth());
-        cajaPreguntas.setPadding(new Insets(15,15,15,15));
-        btn.setOnAction( (ActionEvent e) -> {
-            TextField t = (TextField)cajaPreguntas.getChildren().get(3);
-            TextField t1 = (TextField)cajaPreguntas.getChildren().get(1);
-            pregunta.setInformacion(t.getText());
-            respuesta.setInformacion(t1.getText());
-            bt.remove(temp.getInformacion());
-            bt.add(pregunta.getInformacion(), padre.getInformacion());
-            bt.add(respuesta.getInformacion(),pregunta.getInformacion());
-            bt.add(temp.getInformacion(),pregunta.getInformacion());
-            bt.preOrdenData();
+        cajaPreguntas.setPadding(new Insets(15, 15, 15, 15));
+        btn.setOnAction((ActionEvent e) -> {
+            TextField t = (TextField) cajaPreguntas.getChildren().get(3);
+            TextField t1 = (TextField) cajaPreguntas.getChildren().get(1);
+            try {
+
+                if (textFieldNull(t) || textFieldNull(t1)) {
+                    throw new IOException();
+                }
+
+                pregunta.setInformacion(t.getText());
+                respuesta.setInformacion(t1.getText());
+                bt.remove(temp.getInformacion());
+                bt.add(pregunta.getInformacion(), padre.getInformacion());
+                bt.add(respuesta.getInformacion(), pregunta.getInformacion());
+                bt.add(temp.getInformacion(), pregunta.getInformacion());
+                bt.preOrdenData();
+            } catch (IOException ex) {
+                Alert a = new Alert(AlertType.ERROR);
+                a.setContentText("Porfavor ingrese datos que nos ayude a identificar el animal.");
+                a.show();
+
+            }
         });
-        
+
     }
 
     @FXML
     void responseYes(ActionEvent event) {
         try {
-            response.setText("HE ADIVINADO");  
+            response.setText("HE ADIVINADO");
             Image ima = new Image(new FileInputStream("src/images/genio2.jpg"));
             image.setImage(ima);
         } catch (FileNotFoundException ex) {
@@ -158,22 +170,15 @@ public class PaginaController implements Initializable {
         }
     }
 
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dataArbol(bt);
-        temp =bt.getRoot();
+        temp = bt.getRoot();
         question.setText(temp.getInformacion());
-    }    
-    
-    public static boolean textFieldNull(TextField text) {
-        boolean isNull = false;
-        if (text.getText().isEmpty()) {
-            isNull = true;
-        } else if (!text.getText().matches("[a-zA-Z]+")  && !(text.getText().contains(" "))) {
-            isNull = true;
-        }
-        return isNull;
     }
-    
+
+    public static boolean textFieldNull(TextField text) {
+        return text.getText().isEmpty() && !text.getText().matches("[a-zA-Z]+");
+    }
+
 }
