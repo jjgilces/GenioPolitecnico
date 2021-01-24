@@ -1,7 +1,7 @@
 #P es un mamifero?
 #P es un animal domestico?
 #P hace miau?
-#R 
+#R es un gato
 #R un perro
 #P es un animal de granja?
 #R una oveja

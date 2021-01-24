@@ -77,6 +77,9 @@ public class PaginaController implements Initializable {
     @FXML
     private Button btnFinalN;
 
+    
+    @FXML 
+    private VBox cuestionario;
     @FXML
     void nextOptionNo(ActionEvent event) {
         temp = temp.getRight();
@@ -157,6 +160,7 @@ public class PaginaController implements Initializable {
 
             }
         });
+        
 
     }
 
@@ -185,4 +189,5 @@ public class PaginaController implements Initializable {
         return text.getText().isEmpty() && !text.getText().matches("[a-zA-Z]+");
     }
 
+    
 }
