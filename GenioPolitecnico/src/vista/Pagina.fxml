@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="673.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PaginaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="673.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PaginaController">
    <children>
       <ImageView fitHeight="387.0" fitWidth="671.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -43,17 +43,23 @@
                               </VBox>
                            </children>
                         </Pane>
-                        <HBox prefHeight="65.0" prefWidth="298.0">
+                        <HBox prefHeight="71.0" prefWidth="297.0" stylesheets="@../estilos/principal.css">
                            <children>
-                              <Button fx:id="btnyes" alignment="CENTER" mnemonicParsing="false" onAction="#nextOptionYes" text="Yes">
+                              <Button fx:id="btnyes" alignment="CENTER" mnemonicParsing="false" onAction="#nextOptionYes" text="SI" textFill="WHITE">
                                  <HBox.margin>
-                                    <Insets left="50.0" />
+                                    <Insets />
                                  </HBox.margin>
+                                 <font>
+                                    <Font size="41.0" />
+                                 </font>
                               </Button>
-                              <Button fx:id="btnno" alignment="CENTER" mnemonicParsing="false" onAction="#nextOptionNo" text="No">
+                              <Button fx:id="btnno" alignment="CENTER" mnemonicParsing="false" onAction="#nextOptionNo" text="NO" textFill="WHITE">
                                  <HBox.margin>
-                                    <Insets left="120.0" />
+                                    <Insets left="60.0" right="20.0" />
                                  </HBox.margin>
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding>
                               </Button>
                            </children>
                         </HBox>
@@ -63,18 +69,18 @@
             </Pane>
          </center>
          <top>
-            <Pane prefHeight="100.0" prefWidth="652.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="100.0" prefWidth="652.0" stylesheets="@../estilos/principal.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" prefHeight="104.0" prefWidth="635.0" text="GENIO POLITECNICO">
+                  <Label alignment="CENTER" prefHeight="104.0" prefWidth="635.0" text="GENIO POLITECNICO" textAlignment="CENTER" textFill="#153610" wrapText="true">
                      <font>
-                        <Font name="Comic Sans MS Italic" size="52.0" />
+                        <Font name="Arial Black" size="52.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
          </top>
          <left>
-            <Pane prefHeight="256.0" prefWidth="297.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="256.0" prefWidth="297.0" stylesheets="@../estilos/botones.css" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="image" fitHeight="249.0" fitWidth="198.0" layoutX="14.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -86,8 +92,8 @@
                         <Font name="Bookman Old Style" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnFinalY" alignment="CENTER" layoutX="160.0" layoutY="52.0" mnemonicParsing="false" onAction="#responseYes" opacity="0.15" />
-                  <Button fx:id="btnFinalN" layoutX="231.0" layoutY="52.0" mnemonicParsing="false" onAction="#responseNo" opacity="0.11" />
+                  <Button fx:id="btnFinalY" alignment="CENTER" layoutX="160.0" layoutY="52.0" mnemonicParsing="false" onAction="#responseYes" opacity="0.15" visible="false" />
+                  <Button fx:id="btnFinalN" layoutX="231.0" layoutY="52.0" mnemonicParsing="false" onAction="#responseNo" opacity="0.11" visible="false" />
                </children>
             </Pane>
          </left>

@@ -1,0 +1,27 @@
+/* File style.css */
+.button {
+/*    -fx-padding: 5 5 5 5;*/
+    -fx-pref-width: 50px;
+    -fx-background-radius: 5;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #196F3D 0%, #40a2c4 100%),
+        #40a2c4,
+        #40a2c4,
+        radial-gradient(center 50% 50%, radius 100%, #196F3D, #58aad6);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-size: 1em;
+}
+
+.button:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #4071C4 0%, #D5F5E3 100%),
+        #4071C4,
+        #D5F5E3,
+        radial-gradient(center 50% 50%, radius 100%, #D5F5E3, #4071C4);
+}
+
+.button Text{
+    -fx-fill: white;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+}
+

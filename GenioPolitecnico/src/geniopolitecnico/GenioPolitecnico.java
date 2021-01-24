@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
@@ -50,9 +52,9 @@ public class GenioPolitecnico extends Application{
     
     public static Optional<ButtonType> confirmation(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("CONFIRMATION ALERT");
-        alert.setHeaderText("CERRAR EL PROGRAMA");
-        alert.setContentText("SI DA CLIC EN ACEPTAR, TERMINARÁ EL PROGRAMA \n ¿ESTÁ SEGURO QUE DESEA CONTINUAR?");
+        alert.setTitle("CERRAR EL PROGRAMA");
+        alert.setHeaderText("SI DA CLIC EN ACEPTAR, TERMINARÁ EL PROGRAMA \n ");
+        alert.setContentText("¿ESTÁ SEGURO QUE DESEA CONTINUAR?");
         return alert.showAndWait();    
     }
     

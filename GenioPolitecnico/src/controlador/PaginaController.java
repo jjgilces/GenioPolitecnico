@@ -83,12 +83,7 @@ public class PaginaController implements Initializable {
         question.setText(temp.getInformacion());
         if (temp.getRight() == null) {
             response.setText("¿Era esta tu respuesta?");
-            btnyes.setDisable(true);
-            btnno.setDisable(true);
-            btnFinalY.setOpacity(1);
-            btnFinalN.setOpacity(1);
-            btnFinalY.setText("Yes");
-            btnFinalN.setText("No");
+           preguntarCoindicencia();
         }
     }
 
@@ -98,17 +93,24 @@ public class PaginaController implements Initializable {
         question.setText(temp.getInformacion());
         if (temp.getLeft() == null) {
             response.setText("¿Era esta tu respuesta?");
-            btnyes.setDisable(true);
-            btnno.setDisable(true);
-            btnFinalY.setOpacity(1);
-            btnFinalY.setText("Yes");
-            btnFinalN.setOpacity(1);
-            btnFinalN.setText("No");
+           preguntarCoindicencia();
         }
     }
 
+    private void preguntarCoindicencia(){
+       btnFinalY.setVisible(true);
+       btnFinalN.setVisible(true);
+       btnyes.setDisable(true);
+       btnno.setDisable(true);
+       btnFinalY.setOpacity(1);
+       btnFinalY.setText("SI");
+       btnFinalN.setOpacity(1);
+       btnFinalN.setText("NO");
+    }
     @FXML
     void responseNo(ActionEvent event) {
+        btnFinalY.setVisible(false);
+       btnFinalN.setVisible(false);
         response.setText("");
         btnFinalN.setOpacity(0);
         btnFinalY.setOpacity(0);
@@ -141,7 +143,6 @@ public class PaginaController implements Initializable {
                 if (textFieldNull(t) || textFieldNull(t1)) {
                     throw new IOException();
                 }
-
                 pregunta.setInformacion(t.getText());
                 respuesta.setInformacion(t1.getText());
                 bt.remove(temp.getInformacion());
@@ -161,10 +162,13 @@ public class PaginaController implements Initializable {
 
     @FXML
     void responseYes(ActionEvent event) {
+         btnFinalY.setVisible(false);
+       btnFinalN.setVisible(false);
         try {
             response.setText("HE ADIVINADO");
             Image ima = new Image(new FileInputStream("src/images/genio2.jpg"));
             image.setImage(ima);
+            btnFinalY.setDisable(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PaginaController.class.getName()).log(Level.SEVERE, null, ex);
         }

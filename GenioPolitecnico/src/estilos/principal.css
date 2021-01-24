@@ -1,7 +1,68 @@
-/*
- * Empty Stylesheet file.
- */
-
-.mainFxmlClass {
-
+.root {
+ 
 }
+.content {
+    -fx-background-color: rgb(168, 218, 252);
+}
+
+/* File style.css */
+.button {
+  
+    -fx-padding: 20 20 20 20;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 30px;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #196F3D 0%, #196F3D 100%),
+        #229954,
+        #229954,
+        radial-gradient(center 50% 50%, radius 100%, #229954, #229954);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.2em;
+   
+}
+
+.text-field {
+  
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-background-radius: 8;
+    -fx-font-size: 1em;
+}
+
+
+.button:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #56EB26 0%, #79E123 100%),
+        #56EB26,
+        #6BA739,
+        radial-gradient(center 50% 50%, radius 100%, #79E123, #79E123);
+}
+
+.button Text{
+    -fx-fill: white;
+    -fx-font-size: 3em;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+}
+
+#ButtonJugar  Text {
+    -fx-fill: white;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+}
+
+#ButtonCrearPuesto {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+        #9d4024,
+        #d86e3a,
+        radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+}
+
