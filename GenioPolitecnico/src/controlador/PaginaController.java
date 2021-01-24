@@ -76,7 +76,6 @@ public class PaginaController implements Initializable {
 
     @FXML
     private Button btnFinalN;
-
     
     @FXML 
     private VBox cuestionario;
@@ -98,6 +97,7 @@ public class PaginaController implements Initializable {
             response.setText("¿Era esta tu respuesta?");
            preguntarCoindicencia();
         }
+        
     }
 
     private void preguntarCoindicencia(){
@@ -141,6 +141,7 @@ public class PaginaController implements Initializable {
         btn.setOnAction((ActionEvent e) -> {
             TextField t = (TextField) cajaPreguntas.getChildren().get(3);
             TextField t1 = (TextField) cajaPreguntas.getChildren().get(1);
+            
             try {
 
                 if (textFieldNull(t) || textFieldNull(t1)) {
@@ -153,6 +154,7 @@ public class PaginaController implements Initializable {
                 bt.add(respuesta.getInformacion(), pregunta.getInformacion());
                 bt.add(temp.getInformacion(), pregunta.getInformacion());
                 bt.preOrdenData();
+                volverAJugar();
             } catch (IOException ex) {
                 Alert a = new Alert(AlertType.ERROR);
                 a.setContentText("Porfavor ingrese datos que nos ayude a identificar el animal.");
@@ -160,6 +162,7 @@ public class PaginaController implements Initializable {
 
             }
         });
+        
         
 
     }
@@ -173,11 +176,18 @@ public class PaginaController implements Initializable {
             Image ima = new Image(new FileInputStream("src/images/genio2.jpg"));
             image.setImage(ima);
             btnFinalY.setDisable(true);
+            volverAJugar();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PaginaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    private void volverAJugar(){
+        cuestionario.getChildren().clear();
+        Button jugar = new Button("Volver a jugar");
+        cuestionario.getChildren().add(jugar);
+                
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dataArbol(bt);
