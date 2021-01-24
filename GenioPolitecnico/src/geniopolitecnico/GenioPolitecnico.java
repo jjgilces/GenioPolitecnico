@@ -26,9 +26,7 @@ import javafx.stage.Stage;
  */
 public class GenioPolitecnico extends Application{
 
-    /**
-     * @param args the command line arguments
-     */
+    public static Stage principal;
     public static void main(String[] args) {
         launch(args); 
     }
@@ -40,6 +38,7 @@ public class GenioPolitecnico extends Application{
         stage.setTitle("Genio Politecnico");
         stage.setScene(scene);
         stage.show();
+        principal=stage;
         stage.setOnCloseRequest(e->{
             Optional<ButtonType> result = confirmation();
             if(result.get()==ButtonType.OK){
@@ -47,6 +46,7 @@ public class GenioPolitecnico extends Application{
             }else{
                 e.consume();
         }});
+
     }
     
     

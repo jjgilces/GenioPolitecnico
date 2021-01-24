@@ -6,6 +6,7 @@
 package controlador;
 
 import static geniopolitecnico.GenioPolitecnico.confirmation;
+import static geniopolitecnico.GenioPolitecnico.principal;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -30,23 +31,13 @@ import javafx.stage.Stage;
  * @author johan_p9pyxb1
  */
 public class PrincipalController implements Initializable {
-
+    public static Stage juego;
     @FXML
     void changeView(ActionEvent event) {
+        principal.close();
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/vista/Pagina.fxml"));
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setTitle("Genio Politecnico");
-            stage.setScene(scene);
-            stage.show();
-            stage.setOnCloseRequest(e->{
-            Optional<ButtonType> result = confirmation();
-            if(result.get()==ButtonType.OK){
-                Platform.exit();
-            }else{
-                e.consume();
-        }});
+            ventanaJuego(root);
         } catch (IOException ex) {
             Logger.getLogger(PaginaController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,5 +48,22 @@ public class PrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    public static void ventanaJuego(Parent root){        
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setTitle("Genio Politecnico");
+            stage.setScene(scene);
+            stage.show();
+            juego=stage;
+            stage.setOnCloseRequest(e->{
+            Optional<ButtonType> result = confirmation();
+            if(result.get()==ButtonType.OK){
+                Platform.exit();
+            }else{
+                e.consume();
+        }});
+    }
+    
     
 }
