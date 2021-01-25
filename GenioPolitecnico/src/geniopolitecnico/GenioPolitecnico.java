@@ -5,9 +5,6 @@
  */
 package geniopolitecnico;
 
-import estructura.BinaryTree;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -15,8 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
@@ -38,7 +33,7 @@ public class GenioPolitecnico extends Application{
         stage.setTitle("Genio Politecnico");
         stage.setScene(scene);
         stage.show();
-        principal=stage;
+        setStage(stage);
         stage.setOnCloseRequest(e->{
             Optional<ButtonType> result = confirmation();
             if(result.get()==ButtonType.OK){
@@ -46,8 +41,13 @@ public class GenioPolitecnico extends Application{
             }else{
                 e.consume();
         }});
-
     }
+    
+    public static void setStage(Stage stage ) {
+        principal = stage;
+    }
+    
+    
     
     
     public static Optional<ButtonType> confirmation(){

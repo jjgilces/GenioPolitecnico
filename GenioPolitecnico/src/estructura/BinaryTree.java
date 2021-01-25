@@ -2,13 +2,11 @@ package estructura;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
-import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +15,6 @@ import java.util.logging.Logger;
  * @author Johan
  */
 public class BinaryTree {
-//    public static Node<E> prevNode = null;
 
     Node root;
     public BinaryTree() {
@@ -168,16 +165,16 @@ public class BinaryTree {
     }
 
     public void preOrden() {
-        preOrden(root);
+        preOrdenR(root);
     }
 
-    /*private void preOrden(Node n) {
+    private void preOrdenR(Node n) {
         if (n != null) {
             System.out.println(n);
             preOrden(n.getLeft());
             preOrden(n.getRight());
         }
-    }*/
+    }
     
     public String preOrden(Node n) {
         if (n != null) {
@@ -227,23 +224,6 @@ public class BinaryTree {
         return root;
     }
     
-    public static BinaryTree loadData() {
-        BinaryTree bt = new BinaryTree();
-        bt.add("Es mamifero?",null );
-        bt.add("Es animal domestico?", "Es mamifero?");
-        bt.add("Perro","Es animal domestico?");
-        bt.add("Es de granja?","Es animal domestico?");
-        bt.add("Oveja","Es de granja?");
-        bt.add("Elefante","Es de granja?");
-        bt.add("Es un ave?", "Es mamifero?");
-        bt.add("Un pinguino","Es un ave?");
-        bt.add("Vive en el oceano?","Es un ave?");
-        bt.add("Un calamar","Vive en el oceano?");
-        bt.add("Una araña","Vive en el oceano?");
-        return  bt;
-    }
-   
-
     public void anchura() {
         if (!isEmpty()) {
             Queue<Node> cola = new LinkedList<>();
@@ -276,6 +256,13 @@ public class BinaryTree {
         }
         BinaryTree otro = (BinaryTree) o;
         return equals(root, otro.root);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.root);
+        return hash;
     }
 
     private boolean equals(Node parent1, Node parent2) {

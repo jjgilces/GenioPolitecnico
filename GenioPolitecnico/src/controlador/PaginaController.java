@@ -19,7 +19,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,11 +47,9 @@ public class PaginaController implements Initializable {
         try {
             br = new BufferedReader(new FileReader("src/data/datos.txt"));
             BinaryTree.cargarArbol(br, bt.getRoot());
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(PaginaController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(PaginaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     @FXML
@@ -193,7 +190,6 @@ public class PaginaController implements Initializable {
         jugar.setOnAction((ActionEvent e) -> {
             juego.close();
             try {
-//                Platform.exit();
                 Parent root = FXMLLoader.load(getClass().getResource("/vista/Pagina.fxml"));
                 ventanaJuego(root);
             } catch (IOException ex) {

@@ -20,7 +20,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
@@ -44,10 +43,7 @@ public class PrincipalController implements Initializable {
         
 
     }
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+
     
     public static void ventanaJuego(Parent root){        
             Stage stage = new Stage();
@@ -63,6 +59,11 @@ public class PrincipalController implements Initializable {
             }else{
                 e.consume();
         }});
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
